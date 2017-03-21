@@ -104,12 +104,21 @@ static kwiver::vital::config_block_sptr default_config()
   config->set_value("image_converter:type", "bypass");
 
   config->set_value("feature_detector:type", "ocv_SURF");
-  config->set_value("feature_detector:ocv_SURF:hessian_threshold", 250);
+  config->set_value("feature_detector:ocv_SURF:hessian_threshold", 500);
+  config->set_value("feature_detector:ocv_SURF:n_octaves", 8);
 
   config->set_value("descriptor_extractor:type", "ocv_SURF");
-  config->set_value("descriptor_extractor:ocv_SURF:hessian_threshold", 250);
+  config->set_value("descriptor_extractor:ocv_SURF:hessian_threshold", 500);
+  config->set_value("descriptor_extractor:ocv_SURF:n_octaves", 8);
 
-  config->set_value("feature_matcher:type", "ocv_flann_based");
+  config->set_value("feature_matcher:type", "homography_guided");
+  config->set_value("feature_matcher:homography_guided:feature_matcher1:type", "ocv_flann_based");
+  config->set_value("feature_matcher:homography_guided:feature_matcher2:type", "vxl_constrained");
+  config->set_value("feature_matcher:homography_guided:homography_estimator:type", "vxl");
+  config->set_value("feature_matcher:homography_guided:filter_features:type", "scale");
+  config->set_value("feature_matcher:homography_guided:filter_features:scale:top_fraction", "1.0");
+  config->set_value("feature_matcher:homography_guided:filter_features:scale:max_features", "2000");
+  config->set_value("feature_matcher:homography_guided:min_required_inlier_count", "15");
 
   config->set_value("homog_estimator:type", "vxl");
 
